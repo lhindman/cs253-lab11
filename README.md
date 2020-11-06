@@ -24,7 +24,7 @@ Maintain existing functionality, however instead of directly reading an optional
 Ex: Listing contents of student home directory using -d
 ```
 ./myprog -d /home/student
-
+< too much output >
 ```
   
 <br />
@@ -34,16 +34,31 @@ Ex: Listing contents of student home directory using -d
 Ex: List the contents of student home directory, sorted alphabetically
 ```
 ./myprog -s -d /home/student
+< too much output, but entries should be sorted alphabetically in ascending order >
 ```
 
-Ex: List the contents of student home directory, unsorted
+Ex: List the contents of the current directory, unsorted
 ```
-./myprog -d /home/student
+./myprog 
+main.o
+.vscode
+.
+..
+main.c
+Makefile
+myprog
 ```
 
-Ex: List the contents of the current directory, sorted alphabetically
+Ex: List the contents of the current directory, sorted alphabetically in ascending order
 ```
 ./myprog -s
+.
+..
+.vscode
+Makefile
+main.c
+main.o
+myprog
 ```
 
 <br />
@@ -53,22 +68,22 @@ Ex: List the contents of the current directory, sorted alphabetically
 Ex: Run program in valgrind to verify no memory errors exist
 ```
 valgrind --tool=memcheck --leak-check=yes --show-reachable=yes ./myprog -s -d /usr/bin 
-==89619== Memcheck, a memory error detector
-==89619== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==89619== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==89619== Command: ./myprog -s -d /usr/bin 
+==154461== Memcheck, a memory error detector
+==154461== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==154461== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==154461== Command: ./myprog -s -d /usr/bin 
 
 <<<<<<<< PROGRAM OUTPUT REMOVED >>>>>>>>
 
-==89614== 
-==89614== HEAP SUMMARY:
-==89614==     in use at exit: 0 bytes in 0 blocks
-==89614==   total heap usage: 919 allocs, 919 frees, 126,372 bytes allocated
-==89614== 
-==89614== All heap blocks were freed -- no leaks are possible
-==89614== 
-==89614== For lists of detected and suppressed errors, rerun with: -s
-==89614== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==154461== 
+==154461== HEAP SUMMARY:
+==154461==     in use at exit: 0 bytes in 0 blocks
+==154461==   total heap usage: 1,575 allocs, 1,575 frees, 138,448 bytes allocated
+==154461== 
+==154461== All heap blocks were freed -- no leaks are possible
+==154461== 
+==154461== For lists of detected and suppressed errors, rerun with: -s
+==154461== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 ```
 
 
@@ -89,49 +104,68 @@ This is a continuation of the File System Scanner from the LabWarmup.  Begin by 
 
 
 <br />
-1. Add a "-x" option and a custom filter function to enable/disable displaying hidden files.
+1. Add a "-a" option and a custom filter function to enable/disable displaying hidden files.
 <br /><br />
-Modify the default filter function to prevent displaying hidden files.  Hidden files are any files or directories whose name begins with a '.'.   Add filter function called showHidden() to display hidden files when the user passes the "-x" option.
+Modify the default filter function to prevent displaying hidden files.  Hidden files are any files or directories whose name begins with a '.'.   Add filter function called showAll() to display all files, including hidden files when the user passes the "-a" option.
 
 Ex: List the contents of student home directory, without hidden files displayed
 ```
 ./myprog -d /home/student
+<too much output, but should not include files or directories beginning with '.'>
 ```
 
 Ex: List the contents of the current directory, with hidden files displayed
 ```
-./myprog -d /home/student -x
+./myprog -d /home/student -a
+<too much output, but should include files or directories beginning with '.'>
 ```
 
 <br />
 2. Add a "-f" option and a custom filter function to enable/disable displaying directories
 <br /><br />
-Add filter function called showFilesOnly() to only display regular files when the user passes the "-f" options
+Add filter function called showFilesOnly() to only display regular files when the user passes the "-f" options. The expected behavior is that -f will also display hidden regular files.
 
-Ex: List the contents of student home directory, showing regular files and directories (and all other dirent types) except those that are hidden. 
+Ex: List the contents of the parent directory (lab root), showing regular files and directories (and all other dirent types) except those that are hidden. 
 ```
-./myprog -d /home/student
+./myprog -d ../ 
+README.md
+LabGuide
+LabActivity
+LabWarmup
+CodingJournal
+cs253-lab11.code-workspace
 ```
 
-Ex: List the contents of the current directory, showing only regular files except those that are hidden.
+Ex: List the contents of the parent directory, showing only regular files including those that are hidden.
 ```
-./myprog -d /home/student -f
+./myprog -f -d ../ 
+README.md
+.gitignore
+cs253-lab11.code-workspace
 ```
 
-NOTE: The expected behavior is that the user will only specify a single filter option([x|f]) at a time from the command-line. If both the -x and -f filter options are specified at the same time, the behavior is undefined.
+NOTE: The expected behavior is that the user will only specify a single filter option([a|f]) at a time from the command-line. If both the -a and -f filter options are specified at the same time, the behavior is undefined.
 
 <br />
 3. Add a "-r" and a custom comparison function to sort the list alphabetically, but in the reverse order from the "-s" option.
 <br /><br />
 
-Ex: List the contents of student home directory, sorted alphabetically in ascending order
+Ex: List the contents of the current directory, sorted alphabetically in ascending order
 ```
-./myprog -d /home/student -s 
+./myprog -s
+Makefile
+main.c
+main.o
+myprog
 ```
 
-Ex: List the contents of student home directory, sorted alphabetically in descending order
+Ex: List the contents of the current directory, sorted alphabetically in descending order
 ```
-./myprog -d /home/student -r
+./myprog -r
+myprog
+main.o
+main.c
+Makefile
 ```
 <br />
 4. Add a "-h" option and a custom usage function that displays all command-line options with short descriptions of each and exits with an exit status of 0.
@@ -140,6 +174,12 @@ Ex: List the contents of student home directory, sorted alphabetically in descen
 Ex: Display a simple help dialog and exist with an exit status of zero
 ```
 ./myprog -h
+Usage: ./myprog [-d <path>] [-s] [-a] [-f] [-r]
+        -d <path> Directory to list the contents of
+        -a        Display all files, including hidden files
+        -f        Display only regular files
+        -r        Display entries alphabetically in descending order
+        -s        Display entries alphabetically in ascending order
 ```
 
 
