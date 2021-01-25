@@ -192,17 +192,11 @@ Usage: ./myprog [-d <path>] [-s] [-a] [-f] [-r]
 6. Push the changes from your local repository to the github classroom repository.
 7. Update the Coding Journal with an entry describing your experience using the steps outlined below.
 
-## Coding Journal
+## Coding Journal (Optional)
 Keep a journal of your activities as you work on this lab. Many of the best engineers that I have worked with professionally have kept some sort of engineering journal. I personally packed notebooks around with me for nearly 8 years before I began keeping my notes electronically.   
 
-Your journal can track ideas, bugs, cool links, code snippets, shell commands, rants, or simply a reflection on what worked well or not-so-well with this lab activity. I will not be grading the content of your journal, but I will expect at least two date-stamped journal entries of at least a paragraph each added to the provided Journal.md file.
+Your journal can track ideas, bugs, cool links, code snippets, shell commands, rants, or simply a reflection on what worked well or not-so-well with this lab activity. I will not be grading the content of your journal, but I will expect at least two timestamped journal entries of at least a 75 to 150 words each added to the provided Journal.md file.  The purpose of this component is to help develop the habit of taking notes and creating documentation while you code. The more detail you provide the better as that will help you if you ever need to refer back to this project in the future.
 
-### Implementation Details
-1. Add an entry to the provided Journal.md located in the CodingJournal folder, formatted using markdown notation. You can find a reference at the bottom of this guide.
-
-2. Commit the changes to your local repository with a message stating an entry has been added to the journal.
-3. Push the changes from your local repository to the github classroom repository.
-4. Repeat for reach additional journal entry
 ## Markdown Resources
 Markdown is a notation that is used to format text documents.  It is widely used in Software Development shops around the world, which is why we're asking you to use it in your lab documentation.  
 
