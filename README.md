@@ -133,7 +133,7 @@ LabGuide
 LabActivity
 LabWarmup
 CodingJournal
-cs253-lab11.code-workspace
+cs253-lab12.code-workspace
 ```
 
 Ex: List the contents of the parent directory, showing only regular files including those that are hidden.
@@ -141,7 +141,7 @@ Ex: List the contents of the parent directory, showing only regular files includ
 ./myprog -f -d ../ 
 README.md
 .gitignore
-cs253-lab11.code-workspace
+cs253-lab12.code-workspace
 ```
 
 NOTE: The expected behavior is that the user will only specify a single filter option([a|f]) at a time from the command-line. If both the -a and -f filter options are specified at the same time, the behavior is undefined.
